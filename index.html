@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in</title>
+
+  <!-- Vendor CSS (reuse project's NiceAdmin assets) -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    /* Lightweight overrides to make login match admin look */
+    body, html {height:100%;}
+    .login-wrapper {min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f4f7fa}
+    .card-login{max-width:960px;width:100%;border:0;border-radius:.75rem;overflow:hidden;box-shadow:0 8px 30px rgba(34,41,47,.08)}
+    .card-left{background:linear-gradient(180deg, #007bff 0%, #0062d6 100%);color:#fff;padding:3rem 2rem;display:flex;flex-direction:column;justify-content:center}
+    .brand{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+    .brand img{height:44px}
+    .brand h2{margin:0;font-weight:700}
+    .card-right{padding:3rem}
+    .form-control:focus{box-shadow:none;border-color:#0062d6}
+    .help-text{font-size:.9rem;color:#6c757d}
+    @media (max-width:767.98px){.card-left{display:none}}
+  </style>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="card card-login d-flex flex-row">
+      <div class="card-left col-md-5 d-none d-md-flex">
+        <div>
+          <div class="brand">
+            <img src="assets/img/logo3.png" alt="Logo">
+            <div>
+              <h2>KCI Inc.</h2>
+            </div>
+          </div>
+          <p class="mt-3">Your Property We Manage!</p>
+        </div>
+      </div>
+
+      <div class="card-right col-md-7">
+        <div class="d-md-none mb-3">
+          <div class="brand">
+            <img src="assets/img/logo3.png" alt="Logo">
+            <div>
+              <h5 class="mb-0">KCI Inc.</h5>
+              <small class="text-muted">Property Management System</small>
+            </div>
+          </div>
+        </div>
+        <h4 class="mb-3">Sign In</h4>
+        <div id="error-message" class="alert alert-danger" style="display:none;padding:.5rem .75rem;margin-bottom:1rem;font-size:.95rem"></div>
+
+        <form action="index.php" method="post">
+          <div class="mb-3">
+            <label for="email" class="form-label"></label>
+            <input id="email" name="email" type="text" class="form-control" placeholder="Username / Email" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label"></label>
+            <input id="password" name="password" type="password" class="form-control" placeholder="Password" required>
+          </div>
+
+          <div class="d-grid">
+            <button class="btn btn-primary btn-lg" type="submit">Log in</button>
+          </div>
+        </form>
+
+        <p class="help-text mt-3">Need help? Contact your administrator.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendor JS -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    (function(){
+      const params = new URLSearchParams(window.location.search);
+      const el = document.getElementById('error-message');
+      if (params.get('error') === '1'){
+        el.textContent = 'Invalid username/email or password.';
+        el.style.display = 'block';
+      }
+      if (params.get('logout') === '1'){
+        el.classList.remove('alert-danger');
+        el.classList.add('alert-success');
+        el.textContent = 'You have been logged out.';
+        el.style.display = 'block';
+      }
+    })();
+  </script>
+</body>
+</html>
